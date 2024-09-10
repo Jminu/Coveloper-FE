@@ -21,6 +21,7 @@ function PostDetail() {
     fetchComments();
   }, []);
 
+  //게시물 상세 정보 가져오기
   async function fetchPostDetails() {
     try {
       const token = localStorage.getItem("token");
@@ -35,7 +36,10 @@ function PostDetail() {
       setPost(response.data);
       setUpVoteCount(response.data.upvoteCount);
     } catch (error) {
-      console.error("Error fetching post details", error);
+      console.error(
+        "Error fetching post details",
+        error.response?.data || error
+      );
     }
   }
 
