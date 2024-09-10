@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import "./FindPeopleContent.css";
 
 function FindPeopleContent({ isLoggedIn }) {
-  const [questions, setQuestions] = useState([]);
+  const [recruitMents, setRecruitMents] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchQuestions();
+    fetchRecruitments();
   }, []);
 
-  async function fetchQuestions(page) {
+  async function fetchRecruitments() {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
@@ -24,7 +24,13 @@ function FindPeopleContent({ isLoggedIn }) {
           },
         }
       );
-      setQuestions(response.data.reverse());
+
+      const recruitmentPosts = response.data.filter(
+        //RECRUITMENT인것만 저장
+        (post) => post.boardType === "RECRUITMENT"
+      );
+
+      setRecruitMents(recruitmentPosts.reverse());
     } catch (error) {
       console.error("Error fetching questions", error);
     }
@@ -36,6 +42,11 @@ function FindPeopleContent({ isLoggedIn }) {
     } else {
       alert("로그인이 필요합니다.");
     }
+  }
+
+  function onClickPost(recruitMentId) {
+    console.log("navigate detail");
+    navigate(`/posts/${recruitMentId}`);
   }
 
   function handleNextPage() {}
@@ -50,18 +61,18 @@ function FindPeopleContent({ isLoggedIn }) {
         {/* 글쓰기 버튼 */}
       </header>
       <section className="post-list-section">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {recruitMents.length > 0 ? (
+          recruitMents.map((recruitMent) => (
             <article
-              key={question.id}
-              onClick={() => onClickPost(question.id)}
+              key={recruitMent.id}
+              onClick={() => onClickPost(recruitMent.id)}
               className="post-item"
             >
-              <h3>{question.title}</h3>
+              <h3>{recruitMent.title}</h3>
               <footer>
-                <span>작성자: {question.authorName}</span>
+                <span>작성자: {recruitMent.authorName}</span>
                 <br></br>
-                <span>작성일: {question.createdAt}</span>
+                <span>작성일: {recruitMent.createdAt}</span>
               </footer>
             </article>
           ))
