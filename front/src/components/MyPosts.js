@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const MyPosts = ({ userId }) => {
+const MyPosts = () => {
   const [myPosts, setMyPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,7 +10,7 @@ const MyPosts = ({ userId }) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:8080/api/user/${userId}/posts`,
+          `http://localhost:8080/api/members/posts`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ const MyPosts = ({ userId }) => {
     }
 
     fetchMyPosts();
-  }, [userId]);
+  }, []);
 
   if (loading) {
     return <div>로딩 중...</div>;

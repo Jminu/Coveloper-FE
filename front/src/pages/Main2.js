@@ -11,6 +11,7 @@ import HomeContent from "../components/HomeContent";
 import QnAContent from "../components/QnAContent";
 import { useState } from "react";
 import FindPeopleContent from "../components/FindPeopleContent";
+import MyPosts from "../components/MyPosts";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -31,7 +32,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
       case "구인게시판":
         return <FindPeopleContent isLoggedIn />;
       case "내가 쓴 글":
-        return <MyPosts userId={userInfo.id} />;
+        return <MyPosts />;
       default:
         return <HomeContent />;
     }
