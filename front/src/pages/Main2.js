@@ -15,10 +15,16 @@ import MyPosts from "../components/MyPosts";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
+  const navigate = useNavigate();
 
   function onClickMenu(menuName) {
     console.log(`${menuName} 클릭`);
     setSelectedMenu(menuName);
+  }
+
+  function onClickLogo() {
+    navigate("/");
+    window.location.reload(); // 페이지 새로고침
   }
 
   function renderContent(isLoggedIn) {
@@ -45,7 +51,10 @@ const Main = ({ isLoggedIn, userInfo }) => {
           <div className={styles.navbarItems}>
             <img className={styles.icon} alt="" src="/-1.svg" />
             <div className={styles.navbarItemsInner}>
-              <div className={styles.communityForDeveloperParent}>
+              <div
+                className={styles.communityForDeveloperParent}
+                onClick={onClickLogo}
+              >
                 <i className={styles.communityForDeveloper}>
                   Community For Developer :
                 </i>
