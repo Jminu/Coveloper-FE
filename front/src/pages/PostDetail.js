@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism } from "react-syntax-highlighter/dist/esm/styles/prism"; // 스택오버플로우 유사 스타일
 import Markdown from "markdown-to-jsx";
 import "./PostDetail.css";
+import { getUserInfo } from "../utils/auth";
 
 function PostDetail() {
   const { id } = useParams(); // URL에서 게시물 ID를 가져옴
@@ -15,11 +16,27 @@ function PostDetail() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [upvoteCount, setUpVoteCount] = useState(0);
+  const [selectedCommentId, setSelectedCommentId] = useState(null); //채택된 댓글 ID
+  const [authorName, setAuthorName] = useState(""); //글 작성자 ID
+  const [currentUserName, setCurrentUserName] = useState(""); //로그인한 사용자 이름
 
   useEffect(() => {
     fetchPostDetails();
     fetchComments();
+    fetchCurrentUser();
   }, []);
+
+  //현재 로그인한 유저의 정보 가져오기
+  async function fetchCurrentUser() {
+    try {
+      const userInfo = await getUserInfo();
+      if (userInfo) {
+        setCurrentUserName(userInfo.nickname);
+      }
+    } catch (error) {
+      console.error("Error fetching user info", error);
+    }
+  }
 
   //게시물 상세 정보 가져오기
   async function fetchPostDetails() {
@@ -35,6 +52,7 @@ function PostDetail() {
       );
       setPost(response.data);
       setUpVoteCount(response.data.upvoteCount);
+      setAuthorName(response.data.authorName); //작성자 ID설정
     } catch (error) {
       console.error(
         "Error fetching post details",
@@ -43,6 +61,7 @@ function PostDetail() {
     }
   }
 
+  //추천버튼 눌렀을 때
   async function handleUpvote() {
     try {
       const token = localStorage.getItem("token");
@@ -76,9 +95,45 @@ function PostDetail() {
           },
         }
       );
-      setComments(response.data);
+
+      //.selected가 1인 댓글을 찾아 상단으로 이동
+      const allComments = response.data;
+      const selectedComment = allComments.find(
+        (comment) => comment.selected === true
+      );
+      const otherComments = allComments.filter(
+        (comment) => comment.selected !== true
+      );
+
+      // 채택된 댓글을 상단에 배치, 나머지 댓글들을 그 밑에 표시
+      setComments(
+        selectedComment ? [selectedComment, ...otherComments] : allComments
+      );
     } catch (error) {
       console.error("Error fetching comments", error);
+    }
+  }
+
+  // 댓글 채택하기
+  async function handleSelectComment(commentId) {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        //여기서 commentId에 해당하는 댓글의 selected를 1로 바꿈
+        `http://localhost:8080/api/board/post/${id}/select-answer/${commentId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.message);
+      console.log(response.commentId);
+      // 댓글 목록을 다시 불러와 채택된 댓글을 상단에 표시
+      fetchComments();
+    } catch (error) {
+      console.error("Error selecting comment", error);
     }
   }
 
@@ -160,17 +215,17 @@ function PostDetail() {
         </div>
 
         <h3>댓글</h3>
+        {/* 댓글 목록 */}
         {comments.length > 0 ? (
           comments.map((comment) => (
-            <div key={comment.id} className="comment">
+            <div
+              key={comment.id}
+              className={`comment ${
+                comment.selected === true ? "selected-comment" : ""
+              }`}
+            >
               <Markdown
-                options={{
-                  overrides: {
-                    code: {
-                      component: CodeBlock, // 코드 블록 처리
-                    },
-                  },
-                }}
+                options={{ overrides: { code: { component: CodeBlock } } }}
               >
                 {comment.content}
               </Markdown>
@@ -179,6 +234,13 @@ function PostDetail() {
                 <br />
                 <span>작성일: {comment.createdAt}</span>
               </footer>
+              {/* 글 작성자일 경우에만 채택 버튼 표시 */}
+              {currentUserName === post.authorName &&
+                comment.selected !== 1 && (
+                  <button onClick={() => handleSelectComment(comment.id)}>
+                    채택하기
+                  </button>
+                )}
             </div>
           ))
         ) : (
