@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getUserInfo } from "../utils/auth";
 import "./FindPeopleWrite.css";
@@ -12,6 +12,7 @@ function WriteFindPeople({ isLoggedIn }) {
   const [teamSize, setTeamSize] = useState(1); // 팀 인원
   const [currentMembers, setCurrentMembers] = useState(1); // 현재 인원
   const [boardType, setBoardType] = useState("");
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
