@@ -12,6 +12,8 @@ import Join from "./pages/Join";
 import Main from "./pages/Main2";
 import WriteQnAPost from "./pages/QnAWrite";
 
+import CalendarComponent from './components/Calendar';
+
 import WriteFindPeople from "./pages/FindPeopleWrite";
 import PostDetail from "./pages/PostDetail";
 import { getUserInfo, isLoggedIn, logout } from "./utils/auth";
@@ -107,6 +109,8 @@ function App() {
   }
 
   return (
+    <div>
+    {/* <CalendarComponent /> */}
     <Routes>
       <Route
         path="/"
@@ -121,6 +125,7 @@ function App() {
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
     </Routes>
+    </div>
   );
 }
 export default App;
