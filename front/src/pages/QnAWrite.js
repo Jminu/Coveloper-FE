@@ -12,8 +12,10 @@ function WriteQnAPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [authorName, setAuthorName] = useState("");
-  const [upvoteCount, setUpvoteCount] = useState(0);
-  const [downvoteCount, setDownvoteCount] = useState(0);
+  const [boardType, setBoardType] = useState("QnA");
+  const [projectType, setProjectType] = useState("");
+  const [teamSize, setTeamSize] = useState(1); //구인 게시판일 때만 필요
+  const [currentMembers, setCurrentMembers] = useState(1); //구인 게시판일 때만 필요
 
   const navigate = useNavigate();
 
@@ -33,16 +35,23 @@ function WriteQnAPost() {
 
     const token = localStorage.getItem("token");
 
+    const postData = {
+      title,
+      content,
+      boardType: "QNA",
+    };
+
+    // 구인 게시판일 때만 추가 데이터 설정
+    if (boardType === "RECRUITMENT") {
+      postData.projectType = projectType;
+      postData.teamSize = teamSize;
+      postData.currentMembers = currentMembers;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/board/post",
-        {
-          title,
-          content,
-          authorName: authorName,
-          upvoteCount,
-          downvoteCount,
-        },
+        postData,
         {
           headers: {
             Authorization: `Bearer ${token}`,

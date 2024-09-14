@@ -10,7 +10,8 @@ function WriteFindPeople({ isLoggedIn }) {
   const [authorName, setAuthorName] = useState("");
   const [projectType, setProjectType] = useState("캡스톤"); // 프로젝트 유형 상태
   const [teamSize, setTeamSize] = useState(1); // 팀 인원
-  const [currentSize, setCurrentSize] = useState(1); // 현재 인원
+  const [currentMembers, setCurrentMembers] = useState(1); // 현재 인원
+  const [boardType, setBoardType] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,18 +27,21 @@ function WriteFindPeople({ isLoggedIn }) {
   // 글 작성 제출
   async function handleSubmit(event) {
     event.preventDefault();
+    const token = localStorage.getItem("token");
+
+    const postData = {
+      title,
+      content,
+      boardType: "RECRUITMENT",
+      projectType,
+      teamSize,
+      currentMembers,
+    };
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/posts",
-        {
-          title,
-          content,
-          authorName: authorName,
-          projectType,
-          teamSize,
-          currentSize,
-        },
+        "http://localhost:8080/api/board/post",
+        postData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -101,9 +105,9 @@ function WriteFindPeople({ isLoggedIn }) {
           <label htmlFor="currentSize">현재 인원:</label>
           <input
             type="number"
-            id="currentSize"
-            value={currentSize}
-            onChange={(e) => setCurrentSize(Number(e.target.value))}
+            id="currentMembers"
+            value={currentMembers}
+            onChange={(e) => setCurrentMembers(Number(e.target.value))}
             min="1"
             max={teamSize} // 팀 인원보다 큰 숫자는 입력하지 못하게 설정
             required

@@ -65,3 +65,13 @@
 .upvote-button:hover {
   background-color: #0056b3;
 }
+
+.selected-comment {
+  background-color: #d4edda; /* 연한 초록색 배경 */
+  border: 10px solid #c3e6cb; /* 연한 초록색 테두리 */
+  color: #155724; /* 어두운 초록색 글씨 */
+}
+
+.selected-comment footer {
+  font-weight: bold; /* 채택된 댓글의 작성자 정보 강조 */
+}

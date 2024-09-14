@@ -25,7 +25,12 @@ function QnAContent({ isLoggedIn }) {
         }
       );
 
-      setQuestions(response.data.reverse()); //QnA게시글들 가져온다
+      const questionPosts = response.data.filter(
+        //QNA인것만 저장
+        (post) => post.boardType === "QNA"
+      );
+
+      setQuestions(questionPosts.reverse()); //QnA게시글들 가져온다
     } catch (error) {
       console.error("Error fetching questions", error);
     }
