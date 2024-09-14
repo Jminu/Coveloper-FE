@@ -12,6 +12,7 @@ import QnAContent from "../components/QnAContent";
 import { useState } from "react";
 import FindPeopleContent from "../components/FindPeopleContent";
 import MyPosts from "../components/MyPosts";
+import CoWorkToolContent from "../components/CoWorkToolContent";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -39,6 +40,8 @@ const Main = ({ isLoggedIn, userInfo }) => {
         return <FindPeopleContent isLoggedIn />;
       case "내가 쓴 글":
         return <MyPosts />;
+      case "협업 도구":
+        return <CoWorkToolContent isLoggedIn />;
       default:
         return <HomeContent />;
     }
@@ -159,7 +162,10 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     </div>
                   </div>
                 </div>
-                <div className={styles.monthWeeks3}>
+                <div
+                  className={styles.monthWeeks3}
+                  onClick={() => onClickMenu("협업 도구")}
+                >
                   <div className={styles.monthWeeksChild} />
                   <img
                     className={styles.ricodeBoxFillIcon}

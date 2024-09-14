@@ -22,6 +22,8 @@ export async function getUserInfo() {
       }
     );
 
+    console.log("Response Data: ", response.data);
+
     if (!response.data) {
       console.error("No data received from server");
       return null;

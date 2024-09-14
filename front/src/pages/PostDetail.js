@@ -19,6 +19,7 @@ function PostDetail() {
   const [selectedCommentId, setSelectedCommentId] = useState(null); //채택된 댓글 ID
   const [authorName, setAuthorName] = useState(""); //글 작성자 ID
   const [currentUserName, setCurrentUserName] = useState(""); //로그인한 사용자 이름
+  const [boardType, setBoardType] = useState(""); //게시판 타입
 
   useEffect(() => {
     fetchPostDetails();
@@ -53,6 +54,7 @@ function PostDetail() {
       setPost(response.data);
       setUpVoteCount(response.data.upvoteCount);
       setAuthorName(response.data.authorName); //작성자 ID설정
+      setBoardType(response.data.boardType); //게시판 타입 설정
     } catch (error) {
       console.error(
         "Error fetching post details",
@@ -165,6 +167,36 @@ function PostDetail() {
     }
   }
 
+  //인원추가하기 버튼 클릭 => 유저가 속한 팀DB에 게시물 id를 추가하면됨
+  async function onClickAddPeople(commentId) {
+    try {
+      const token = localStorage.getItem("token");
+
+      // 게시물 id는 useParams에서 가져온 id 사용
+      const postId = id;
+
+      // 서버로 요청을 보내 팀DB에 게시물 id와 유저(commentAuthorName)를 추가
+      const response = await axios.post(
+        `http://localhost:8080/api/board/post/${postId}/add-member/${commentId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("팀에 추가되었습니다.");
+      } else {
+        alert("인원 추가에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      console.error("Error adding people", error);
+      alert("오류가 발생했습니다. 나중에 다시 시도해주세요.");
+    }
+  }
+
   // 커스텀 코드 블록 렌더링
   const CodeBlock = ({ children, className }) => {
     const language = className?.replace("lang-", "") || "javascript"; // 기본적으로 JavaScript로 설정
@@ -198,6 +230,13 @@ function PostDetail() {
           <br />
           <span>작성일: {post.createdAt}</span>
         </footer>
+        {/* boardType이 RECRUITMENT일 경우에만 필요인원과 현재인원 표시 */}
+        {post.boardType === "RECRUITMENT" && (
+          <div className="recruitment-info">
+            <p>필요 인원: {post.teamSize}</p>
+            <p>현재 인원: {post.currentMembers}</p>
+          </div>
+        )}
         <button className="upvote-button" onClick={handleUpvote}>
           추천
         </button>
@@ -235,12 +274,19 @@ function PostDetail() {
                 <span>작성일: {comment.createdAt}</span>
               </footer>
               {/* 글 작성자일 경우에만 채택 버튼 표시 */}
-              {currentUserName === post.authorName &&
+              {/* boardType에 따라 버튼을 조건부로 표시 */}
+              {boardType === "QNA" &&
+                currentUserName === post.authorName &&
                 comment.selected !== 1 && (
                   <button onClick={() => handleSelectComment(comment.id)}>
                     채택하기
                   </button>
                 )}
+              {boardType === "RECRUITMENT" && (
+                <button onClick={() => onClickAddPeople(comment.id)}>
+                  인원추가하기
+                </button>
+              )}
             </div>
           ))
         ) : (
