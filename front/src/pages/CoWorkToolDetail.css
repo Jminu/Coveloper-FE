@@ -1,0 +1,91 @@
+/* TeamBoard.css */
+.team-board-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-board-container h3 {
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.team-members {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.team-members ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-members li {
+  padding: 10px 0;
+  font-size: 1.1rem;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+}
+
+.team-members li p {
+  margin: 0;
+}
+
+.file-management {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-management h3 {
+  margin-bottom: 20px;
+}
+
+.file-management .react-sortable-tree {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.file-management form {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.file-management input[type="file"] {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.file-management button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-management button:hover {
+  background-color: #0056b3;
+}
