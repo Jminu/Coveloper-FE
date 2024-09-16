@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./AllPostsContent.css";
 
 function CoWorkToolContent({ isLoggedIn }) {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -34,9 +35,9 @@ function CoWorkToolContent({ isLoggedIn }) {
 
   function onClickNextPage() {}
 
-  function onClickPost(postId) {
-    console.log("navigate detail");
-    navigate(`/posts/${postId}`);
+  function onClickPost(teamId) {
+    console.log("navigate to team board");
+    navigate(`/teams/${teamId}`);
   }
 
   return (

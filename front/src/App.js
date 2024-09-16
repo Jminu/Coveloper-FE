@@ -16,6 +16,7 @@ import CalendarComponent from './components/Calendar';
 
 import WriteFindPeople from "./pages/FindPeopleWrite";
 import PostDetail from "./pages/PostDetail";
+import CoWorkToolDetail from "./pages/CoWorkToolDetail";
 import { getUserInfo, isLoggedIn, logout } from "./utils/auth";
 /**
  * getUserInfo() : 토큰제출하고, 사용자 정보 가져옴
@@ -124,6 +125,7 @@ function App() {
       <Route path="/writeqna" element={<WriteQnAPost />} />
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
+      <Route path="/teams/:id" element={<CoWorkToolDetail />} />
     </Routes>
     </div>
   );
