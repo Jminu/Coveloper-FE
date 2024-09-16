@@ -1,0 +1,86 @@
+.react-calendar {
+  background-color: #F9F9F9; /* 원하는 배경색으로 변경 */
+  border: 100px; /* 테두리를 제거하거나 조정 */
+  border-radius: 8px; /* 모서리를 둥글게 */
+  width: 400px;
+}
+
+
+.calendar-container {
+    position: relative;  /* 부모 요소 기준 위치 조정 */
+    top: 0px;          /* 페이지 상단에서 116px 아래에 위치 */
+    right: 0px;         /* 오른쪽에서 20px 떨어진 위치로 설정 */
+    padding-bottom: 0px; /* 캘린더 하단에 공간 추가 */
+    padding: 0px; /* 내부 여백 */
+    margin: auto; 
+    width: 350px;        /* 캘린더의 너비 */
+    height: 250px;       /* 캘린더의 높이 */
+  }
+  
+  .react-calendar {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .today-circle abbr {
+    border: 0.8px solid #325487; /* 오늘 날짜에 동그라미 테두리 */
+    border-radius: 50%;     /* 동그라미 모양으로 만들기 */
+    padding: 0.5em;
+  }
+  
+/* 더보기 링크 */
+
+.more-link a {
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.more-link {
+  position: absolute; /* 절대 위치 */
+  bottom: 10px; /* 캘린더 하단에 고정 */
+  width: 100%;
+  left:300px /* 중앙 정렬 */
+}
+
+
+/* 년 버튼 부분 */
+  .react-calendar__navigation {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 수직 정렬 */
+    margin-bottom: 18px; /* 캘린더와의 간격 조정 */
+  }
+
+/* 요일 부분 */
+.react-calendar__month-view__weekdays {
+  display: flex;
+  justify-content: center; /* 요일들을 수평 중앙 정렬 */
+  align-items: center; /* 요일들을 수직 중앙 정렬 */
+  font-size: 14px;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  text-align: center; /* 각 요일 텍스트를 중앙 정렬 */
+  display: inline-block;  /* flex 대신 inline-block으로 변경 */
+  width: auto; /* 요일 칸의 너비를 자동으로 설정 */
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+  overflow: hidden; /* 넘치는 텍스트가 보이지 않도록 설정 */
+  text-overflow: ellipsis; /* 넘치는 텍스트가 생략 부호(…)로 표시되지 않도록 제거 */
+  font-size: 15px;
+}
+
+  /* 날짜 부분 */
+.react-calendar__tile {
+  background: none; /* 배경 없애기 */
+  box-shadow: none; /* 박스 섀도우 없애기 */
+  border: none; /* 테두리 없애기 */
+  padding: 8px;
+  font-size: 13px;
+}
+/* 날짜 클릭 시 배경 바뀜 */
+.react-calendar__tile--active {
+  background-color: #E7EBF1; /* 클릭한 날짜의 배경색 */
+  color: rgb(0, 0, 0); /* 클릭한 날짜의 글씨색 */
+}
+

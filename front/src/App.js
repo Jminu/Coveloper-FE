@@ -12,6 +12,7 @@ import Join from "./pages/Join";
 import Main from "./pages/Main2";
 import WriteQnAPost from "./pages/QnAWrite";
 
+import CalendarPage from "./pages/CalendarPage";
 import CalendarComponent from './components/Calendar';
 
 import WriteFindPeople from "./pages/FindPeopleWrite";
@@ -109,8 +110,6 @@ function App() {
   }
 
   return (
-    <div>
-    {/* <CalendarComponent /> */}
     <Routes>
       <Route
         path="/"
@@ -124,8 +123,12 @@ function App() {
       <Route path="/writeqna" element={<WriteQnAPost />} />
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
+      
+      <Route path="/" element={<CalendarComponent />} />
+      <Route path="/CalendarPage" element={<CalendarPage />} /> 
+      
+      
     </Routes>
-    </div>
   );
 }
 export default App;
