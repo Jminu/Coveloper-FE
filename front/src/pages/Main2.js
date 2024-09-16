@@ -11,6 +11,7 @@ import HomeContent from "../components/HomeContent";
 import QnAContent from "../components/QnAContent";
 import { useState } from "react";
 import FindPeopleContent from "../components/FindPeopleContent";
+import CalendarComponent from '../components/Calendar';
 import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
 
@@ -198,6 +199,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
         </section>
         <div className={styles.frameContainer}>
           {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
+            <CalendarComponent />
         </div>
       </main>
       <div className={styles.div11} />
