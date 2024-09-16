@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import { Link } from 'react-router-dom';
-import './Calendar.css'; // 커스텀 스타일 파일
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import { Link } from "react-router-dom";
+import "./Calendar.css"; // 커스텀 스타일 파일
 
 const CalendarComponent = () => {
   const [date, setDate] = useState(new Date());
@@ -15,7 +15,7 @@ const CalendarComponent = () => {
         tileClassName={({ date, view }) => {
           // 오늘 날짜에 동그라미 표시
           if (date.toDateString() === new Date().toDateString()) {
-            return 'today-circle';
+            return "today-circle";
           }
         }}
       />

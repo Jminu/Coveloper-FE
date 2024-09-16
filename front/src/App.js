@@ -11,9 +11,7 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Main from "./pages/Main2";
 import WriteQnAPost from "./pages/QnAWrite";
-
-import CalendarComponent from './components/Calendar';
-
+import CalendarPage from "./pages/CalendarPage";
 import WriteFindPeople from "./pages/FindPeopleWrite";
 import PostDetail from "./pages/PostDetail";
 import { getUserInfo, isLoggedIn, logout } from "./utils/auth";
@@ -122,6 +120,7 @@ function App() {
       <Route path="/writeqna" element={<WriteQnAPost />} />
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
+      <Route path="/CalendarPage" element={<CalendarPage />} />
     </Routes>
   );
 }
