@@ -24,11 +24,26 @@ function TeamBoard() {
 
   // 팀원 정보 가져오기
   async function fetchTeamMembers() {
+    const token = localStorage.getItem("token");
+    console.log("팀 아이디 : ", teamId);
+
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/teams/${teamId}/members`
+        `http://localhost:8080/board/post/${teamId}/team-members`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      setTeamMembers(response.data);
+
+      setTeamMembers(response.data); //팀원 정보 저장
+
+      if (response.status === 200) {
+        console.log("성공적으로 팀원 정보를 가져왔습니다!");
+      } else {
+        console.log("뭔가 이상함");
+      }
     } catch (error) {
       console.error("Error fetching team members", error);
     }
@@ -93,9 +108,7 @@ function TeamBoard() {
         <h3>팀원 소개 및 역할</h3>
         <ul>
           {teamMembers.map((member) => (
-            <li key={member.id}>
-              {member.nickname} - {member.role}
-            </li>
+            <li key={member.id}>{member.nickname}</li>
           ))}
         </ul>
       </section>
@@ -118,7 +131,7 @@ function TeamBoard() {
         <form onSubmit={handleFileUpload}>
           <input
             type="file"
-            webkitdirectory="true"
+            /*webkitdirectory="true"*/
             multiple
             onChange={handleFileSelection}
           />

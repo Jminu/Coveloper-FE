@@ -121,7 +121,7 @@ function App() {
       <Route path="/writeqna" element={<WriteQnAPost />} />
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
-      <Route path="/teams/:id" element={<TeamBoard />} />
+      <Route path="/teams/:teamId" element={<TeamBoard />} />
       <Route path="/CalendarPage" element={<CalendarPage />} />
     </Routes>
   );
