@@ -237,10 +237,15 @@ function PostDetail() {
             <p>현재 인원: {post.currentMembers}</p>
           </div>
         )}
-        <button className="upvote-button" onClick={handleUpvote}>
-          추천
-        </button>
-        <div>추천수 : {post.upvoteCount}</div>
+        <div className="upvote-container">
+          <img
+            src="/upButtonBlur.svg"
+            alt="추천버튼"
+            className="upvote-icon"
+            onClick={handleUpvote}
+          />
+          <div>{post.upvoteCount}</div>
+        </div>
       </div>
 
       <section className="comments-section">
