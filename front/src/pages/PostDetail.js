@@ -233,8 +233,9 @@ function PostDetail() {
         {/* boardType이 RECRUITMENT일 경우에만 필요인원과 현재인원 표시 */}
         {post.boardType === "RECRUITMENT" && (
           <div className="recruitment-info">
-            <p>필요 인원: {post.teamSize}</p>
-            <p>현재 인원: {post.currentMembers}</p>
+            <p>
+              필요 인원: {post.teamSize} 현재 인원: {post.currentMembers}
+            </p>
           </div>
         )}
         <div className="upvote-container">
@@ -283,14 +284,24 @@ function PostDetail() {
               {boardType === "QNA" &&
                 currentUserName === post.authorName &&
                 comment.selected !== 1 && (
-                  <button onClick={() => handleSelectComment(comment.id)}>
-                    채택하기
-                  </button>
+                  <div className="check-container">
+                    <img
+                      src="/check.svg"
+                      alt="채택"
+                      className="check-button"
+                      onClick={() => handleSelectComment(comment.id)}
+                    />
+                  </div>
                 )}
               {boardType === "RECRUITMENT" && (
-                <button onClick={() => onClickAddPeople(comment.id)}>
-                  인원추가하기
-                </button>
+                <div className="people-plus-container">
+                  <img
+                    src="/people-plus.svg"
+                    alt="인원추가"
+                    className="people-plus-icon"
+                    onClick={() => onClickAddPeople(comment.id)}
+                  />
+                </div>
               )}
             </div>
           ))
