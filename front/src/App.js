@@ -11,12 +11,11 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Main from "./pages/Main2";
 import WriteQnAPost from "./pages/QnAWrite";
-
-import CalendarComponent from './components/Calendar';
-
+import CalendarPage from "./pages/CalendarPage";
 import WriteFindPeople from "./pages/FindPeopleWrite";
 import PostDetail from "./pages/PostDetail";
 import { getUserInfo, isLoggedIn, logout } from "./utils/auth";
+import TeamBoard from "./pages/CoWorkToolDetail";
 /**
  * getUserInfo() : 토큰제출하고, 사용자 정보 가져옴
  * isLoggedIn() : localStorage에(쿠키) 토큰 있는지 확인
@@ -122,6 +121,8 @@ function App() {
       <Route path="/writeqna" element={<WriteQnAPost />} />
       <Route path="/writefindpeople" element={<WriteFindPeople />} />
       <Route path="/posts/:id" element={<PostDetail />} />
+      <Route path="/teams/:teamId" element={<TeamBoard />} />
+      <Route path="/CalendarPage" element={<CalendarPage />} />
     </Routes>
   );
 }

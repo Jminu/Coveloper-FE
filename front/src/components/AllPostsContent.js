@@ -39,12 +39,40 @@ function AllPostsContent() {
     navigate(`/posts/${postId}`);
   }
 
+  // 게시판 타입에 따른 아이콘 선택 함수
+  function getBoardTypeIcon(boardType) {
+    switch (boardType) {
+      case "QNA":
+        return "/question.svg"; // QnA 게시판 아이콘
+      case "RECRUITMENT":
+        return "/find-people.svg"; // 구인 게시판 아이콘
+      // 다른 게시판 타입이 있는 경우 추가
+      default:
+        return "/icons/default-icon.svg"; // 기본 아이콘 (없을 경우)
+    }
+  }
+
+  // 날짜 포맷 함수
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   return (
     <div className="post-list-container">
+      {/*
       <header>
         <h2>전체 글 게시판</h2>
       </header>
       <hr></hr>
+      */}
       <section className="post-list-section">
         {posts.map((post) => (
           <article
@@ -53,10 +81,19 @@ function AllPostsContent() {
             className="post-item"
           >
             <h3>{post.title}</h3>
+            <img
+              src={getBoardTypeIcon(post.boardType)} // 게시판 타입에 따른 아이콘 삽입
+              alt={`${post.boardType} 아이콘`}
+              className="board-type-icon" // CSS 클래스 추가
+            />
             <footer>
               <span>작성자: {post.authorName}</span>
               <br></br>
-              <span>작성일: {post.createdAt}</span>
+              <span>작성일: {formatDate(post.createdAt)}</span>
+              <span style={{ float: "right" }}>
+                <img src="/up.svg" alt="따봉" />
+                {post.upvoteCount}
+              </span>
             </footer>
           </article>
         ))}

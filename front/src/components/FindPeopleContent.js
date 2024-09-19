@@ -36,6 +36,19 @@ function FindPeopleContent({ isLoggedIn }) {
     }
   }
 
+  // 날짜 포맷 함수
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   function handleWriteButtonClick() {
     if (isLoggedIn) {
       navigate("/writefindpeople");
@@ -72,7 +85,29 @@ function FindPeopleContent({ isLoggedIn }) {
               <footer>
                 <span>작성자: {recruitMent.authorName}</span>
                 <br></br>
-                <span>작성일: {recruitMent.createdAt}</span>
+                <span>작성일: {formatDate(recruitMent.createdAt)}</span>
+                <br></br>
+                <span>
+                  {recruitMent.currentMembers} / {recruitMent.teamSize}
+                </span>
+                {/* 팀 인원이 다 찼을 때와 아닐 때 다른 아이콘 표시 */}
+                {recruitMent.currentMembers >= recruitMent.teamSize ? (
+                  <img
+                    src="/full-team-icon.svg"
+                    alt="팀 다 참"
+                    className="team-status-icon"
+                  />
+                ) : (
+                  <img
+                    src="/not-full-team-icon.svg"
+                    alt="팀 덜 참"
+                    className="team-status-icon"
+                  />
+                )}
+                <span style={{ float: "right" }}>
+                  <img src="/up.svg" alt="따봉" />
+                  {recruitMent.upvoteCount}
+                </span>
               </footer>
             </article>
           ))

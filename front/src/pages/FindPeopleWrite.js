@@ -12,7 +12,7 @@ function WriteFindPeople({ isLoggedIn }) {
   const [teamSize, setTeamSize] = useState(1); // 팀 인원
   const [currentMembers, setCurrentMembers] = useState(1); // 현재 인원
   const [boardType, setBoardType] = useState("");
-  const { id } = useParams();
+
   const navigate = useNavigate();
 
   useEffect(() => {

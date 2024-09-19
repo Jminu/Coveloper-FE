@@ -41,7 +41,7 @@ header button:hover {
   width: 100%; /* 부모 요소의 너비에 맞춤 */
   background-color: #f9f9f9;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
@@ -49,14 +49,21 @@ header button:hover {
 .post-item {
   background-color: #fff;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 12px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  border: 2px solid #0e3672;
 }
 
 .post-item:hover {
   background-color: #f0f0f0; /* hover 시 색상 변화 */
+}
+
+.post-item h3 {
+  color: #0e3672; /* 제목의 색을 #0E3672로 설정 */
+  font-weight: bold; /* 필요 시 굵은 글씨로 설정 */
+  margin-bottom: 10px; /* 여백 추가 */
 }
 
 /* 페이지네이션 스타일 */

@@ -12,7 +12,7 @@ function WriteQnAPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [authorName, setAuthorName] = useState("");
-  const [boardType, setBoardType] = useState("QnA");
+  const [boardType, setBoardType] = useState("QNA");
   const [projectType, setProjectType] = useState("");
   const [teamSize, setTeamSize] = useState(1); //구인 게시판일 때만 필요
   const [currentMembers, setCurrentMembers] = useState(1); //구인 게시판일 때만 필요
@@ -32,21 +32,16 @@ function WriteQnAPost() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     const token = localStorage.getItem("token");
 
     const postData = {
       title,
       content,
       boardType: "QNA",
+      projectType,
+      teamSize,
+      currentMembers,
     };
-
-    // 구인 게시판일 때만 추가 데이터 설정
-    if (boardType === "RECRUITMENT") {
-      postData.projectType = projectType;
-      postData.teamSize = teamSize;
-      postData.currentMembers = currentMembers;
-    }
 
     try {
       const response = await axios.post(

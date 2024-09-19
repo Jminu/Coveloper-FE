@@ -10,19 +10,21 @@
 .post-content,
 .comments-section {
   width: 100%; /* 부모 요소의 너비에 맞춤 */
-  background-color: #c5ccdb;
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  border: 2px solid #0e3672;
 }
 
 .comments-section .comment {
   background-color: #fff;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 12px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid #0e3672;
 }
 
 .new-comment {
@@ -42,7 +44,7 @@
 
 .new-comment button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #6478b4;
   color: white;
   border: none;
   border-radius: 4px;
@@ -50,7 +52,7 @@
 }
 
 .new-comment button:hover {
-  background-color: #0056b3;
+  background-color: #0e3672;
 }
 
 .upvote-button {
@@ -74,4 +76,43 @@
 
 .selected-comment footer {
   font-weight: bold; /* 채택된 댓글의 작성자 정보 강조 */
+}
+
+.upvote-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 우측 정렬 */
+  margin-top: 10px;
+}
+
+.upvote-icon {
+  cursor: pointer;
+  margin-right: 5px;
+  width: 24px; /* 아이콘 크기 */
+  height: 24px;
+  transition: 0.3s; /* 아이콘 변화에 부드러운 전환 효과 추가 */
+}
+
+.upvote-icon:hover {
+  content: url("../../public/upButton.svg"); /* 커서를 올렸을 때 변경될 아이콘 */
+}
+
+.people-plus-icon {
+  cursor: pointer;
+}
+
+.people-plus-icon:hover {
+  content: url("../../public/people-plus-hover.svg");
+}
+
+.check-button {
+  cursor: pointer;
+  margin-right: 5px;
+  width: 50px; /* 아이콘 크기 */
+  height: 50px;
+  transition: 0.3s; /* 아이콘 변화에 부드러운 전환 효과 추가 */
+}
+
+.check-button:hover {
+  content: url("../../public/check-hover.svg");
 }

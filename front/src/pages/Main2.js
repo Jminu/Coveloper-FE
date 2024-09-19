@@ -11,7 +11,7 @@ import HomeContent from "../components/HomeContent";
 import QnAContent from "../components/QnAContent";
 import { useState } from "react";
 import FindPeopleContent from "../components/FindPeopleContent";
-import CalendarComponent from '../components/Calendar';
+import CalendarComponent from "../components/Calendar";
 import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
 
@@ -114,7 +114,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
                   <img
                     className={styles.icroundFolderIcon}
                     alt=""
-                    stc="/icsharpsearch1.svg"
+                    src="/question.svg"
                   />
                   <div className={styles.frame}>
                     <div className={styles.coveloperChatbot}>QnA</div>
@@ -129,24 +129,10 @@ const Main = ({ isLoggedIn, userInfo }) => {
                   <img
                     className={styles.icroundFolderIcon}
                     alt=""
-                    stc="/icsharpsearch1.svg"
+                    src="/find-people.svg"
                   />
                   <div className={styles.frame}>
                     <div className={styles.coveloperChatbot}>구인게시판</div>
-                  </div>
-                </div>
-                <div className={styles.calendar}>
-                  {/**프로젝트 공유게시판 버튼 */}
-                  <div className={styles.monthWeeksChild} />
-                  <img
-                    className={styles.icroundFolderIcon}
-                    alt=""
-                    src="/icroundfolder.svg"
-                  />
-                  <div className={styles.frame}>
-                    <div className={styles.coveloperChatbot}>
-                      프로젝트 공유 게시판
-                    </div>
                   </div>
                 </div>
                 <div className={styles.loginButtonContainer}>
@@ -199,7 +185,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
         </section>
         <div className={styles.frameContainer}>
           {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
-            <CalendarComponent />
+          <CalendarComponent />
         </div>
       </main>
       <div className={styles.div11} />
