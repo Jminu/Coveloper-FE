@@ -49,6 +49,19 @@ function QnAContent({ isLoggedIn }) {
     navigate(`/posts/${questionId}`);
   }
 
+  // 날짜 포맷 함수
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   function onClickPreviousPage() {}
 
   function onClickNextPage() {}
@@ -72,7 +85,11 @@ function QnAContent({ isLoggedIn }) {
               <footer>
                 <span>작성자: {question.authorName}</span>
                 <br></br>
-                <span>작성일: {question.createdAt}</span>
+                <span>작성일: {formatDate(question.createdAt)}</span>
+                <span style={{ float: "right" }}>
+                  <img src="/up.svg" alt="따봉" />
+                  {question.upvoteCount}
+                </span>
               </footer>
             </article>
           ))
