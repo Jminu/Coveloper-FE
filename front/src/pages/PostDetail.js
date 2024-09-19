@@ -207,6 +207,37 @@ function PostDetail() {
     );
   };
 
+  // 팀원 아이콘 렌더링
+  function renderTeamIcons(currentMembers, teamSize) {
+    const icons = [];
+
+    // 현재 모인 인원 아이콘1 추가
+    for (let i = 0; i < currentMembers; i++) {
+      icons.push(
+        <img
+          key={`filled-${i}`}
+          src="/full-team-icon.svg" // 모인 인원 아이콘
+          alt="모인 인원"
+          className="team-icon"
+        />
+      );
+    }
+
+    // 남은 인원 아이콘2 추가
+    for (let i = 0; i < teamSize - currentMembers; i++) {
+      icons.push(
+        <img
+          key={`empty-${i}`}
+          src="/not-full-team-icon.svg" // 남은 인원 아이콘
+          alt="남은 인원"
+          className="team-icon"
+        />
+      );
+    }
+
+    return icons;
+  }
+
   if (!post) return <div>Loading...</div>;
 
   return (
@@ -233,9 +264,9 @@ function PostDetail() {
         {/* boardType이 RECRUITMENT일 경우에만 필요인원과 현재인원 표시 */}
         {post.boardType === "RECRUITMENT" && (
           <div className="recruitment-info">
-            <p>
-              필요 인원: {post.teamSize} 현재 인원: {post.currentMembers}
-            </p>
+            <div className="team-icon">
+              {renderTeamIcons(post.currentMembers, post.teamSize)}
+            </div>
           </div>
         )}
         <div className="upvote-container">
