@@ -9,6 +9,7 @@ import {
 } from "firebase/storage";
 import { storage } from "./firebase"; // Firebase 설정 파일
 import "./CoWorkToolDetail.css";
+import WikiBoard from "../components/WikiBoard";
 
 function TeamBoard() {
   const { teamId } = useParams(); // 팀 ID를 URL에서 가져옴
@@ -138,6 +139,11 @@ function TeamBoard() {
           <button type="submit">파일 및 폴더 업로드</button>
         </form>
         {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+      </section>
+
+      {/* Wiki 문서 관리 */}
+      <section className="wiki-board">
+        <WikiBoard teamId={teamId} /> {/* teamId를 WikiBoard에 전달 */}
       </section>
     </div>
   );

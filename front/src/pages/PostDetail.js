@@ -238,6 +238,19 @@ function PostDetail() {
     return icons;
   }
 
+  // 날짜 포맷 함수
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   if (!post) return <div>Loading...</div>;
 
   return (
@@ -259,27 +272,28 @@ function PostDetail() {
         <footer>
           <span>작성자: {post.authorName}</span>
           <br />
-          <span>작성일: {post.createdAt}</span>
+          <span>작성일: {formatDate(post.createdAt)}</span>
         </footer>
-        {/* boardType이 RECRUITMENT일 경우에만 필요인원과 현재인원 표시 */}
-        {post.boardType === "RECRUITMENT" && (
-          <div className="recruitment-info">
-            <div className="team-icon">
-              {renderTeamIcons(post.currentMembers, post.teamSize)}
-            </div>
+        <div className="upvote-and-team-container">
+          <div className="upvote-container">
+            <img
+              src="/upButtonBlur.svg"
+              alt="추천버튼"
+              className="upvote-icon"
+              onClick={handleUpvote}
+            />
+            <div>{post.upvoteCount}</div>
           </div>
-        )}
-        <div className="upvote-container">
-          <img
-            src="/upButtonBlur.svg"
-            alt="추천버튼"
-            className="upvote-icon"
-            onClick={handleUpvote}
-          />
-          <div>{post.upvoteCount}</div>
+          {/* boardType이 RECRUITMENT일 경우에만 필요인원과 현재인원 표시 */}
+          {post.boardType === "RECRUITMENT" && (
+            <div className="recruitment-info">
+              <div className="team-icon">
+                {renderTeamIcons(post.currentMembers, post.teamSize)}
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
       <section className="comments-section">
         <div className="new-comment">
           <textarea
