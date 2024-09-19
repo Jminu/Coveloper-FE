@@ -132,6 +132,7 @@ function PostDetail() {
       );
       console.log(response.message);
       console.log(response.commentId);
+      alert("채택 완료");
       // 댓글 목록을 다시 불러와 채택된 댓글을 상단에 표시
       fetchComments();
     } catch (error) {
@@ -326,18 +327,26 @@ function PostDetail() {
               </footer>
               {/* 글 작성자일 경우에만 채택 버튼 표시 */}
               {/* boardType에 따라 버튼을 조건부로 표시 */}
-              {boardType === "QNA" &&
-                currentUserName === post.authorName &&
-                comment.selected !== 1 && (
-                  <div className="check-container">
+              {boardType === "QNA" && currentUserName === post.authorName && (
+                <div className="check-container">
+                  {comment.selected ? (
+                    // 채택된 댓글은 다른 아이콘을 표시하고 onClick을 제거함
+                    <img
+                      src="/check-fill.svg" // 채택된 댓글용 아이콘
+                      alt="채택된 댓글"
+                      className="check-button"
+                    />
+                  ) : (
+                    // 채택되지 않은 댓글은 기존 아이콘과 onClick을 유지
                     <img
                       src="/check.svg"
                       alt="채택"
                       className="check-button"
                       onClick={() => handleSelectComment(comment.id)}
                     />
-                  </div>
-                )}
+                  )}
+                </div>
+              )}
               {boardType === "RECRUITMENT" && (
                 <div className="people-plus-container">
                   <img
