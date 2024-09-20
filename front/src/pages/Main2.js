@@ -12,9 +12,9 @@ import QnAContent from "../components/QnAContent";
 import { useState } from "react";
 import FindPeopleContent from "../components/FindPeopleContent";
 import CalendarComponent from "../components/Calendar";
-import ChatBot from '../components/ChatBot';
 import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
+import ChatBot from "../components/ChatBot";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -185,7 +185,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
           <div className={styles.frameWrapper}>{renderContent()}</div>
         </section>
         <div className={styles.frameContainer}>
-          {/*캘린더 */}
+          {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
           <CalendarComponent />
           <ChatBot />
         </div>

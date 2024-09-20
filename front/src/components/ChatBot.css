@@ -11,31 +11,31 @@
     box-sizing: border-box;
     background-color: #f8f8f8;
     font-family: Arial, sans-serif;
-}
-
-/* 채팅 기록 영역 */
-.chatbot-messages {
+  }
+  
+  /* 채팅 기록 영역 */
+  .chatbot-messages {
     padding: 10px;
     overflow-y: scroll;
     flex-grow: 1;
-}
-
-/* 개별 메시지 */
-.chatbot-message {
+  }
+  
+  /* 개별 메시지 */
+  .chatbot-message {
     margin: 10px 0;
     display: flex;
-}
-
-.user-message {
+  }
+  
+  .user-message {
     justify-content: flex-end;
-}
-
-.bot-message {
+  }
+  
+  .bot-message {
     justify-content: flex-start;
-}
-
-/* 메시지 텍스트 */
-.message-bubble {
+  }
+  
+  /* 메시지 텍스트 */
+  .message-bubble {
     max-width: 70%;
     padding: 10px;
     border-radius: 20px;
@@ -46,7 +46,7 @@
 }
 
 .user-message .message-bubble {
-
+    
     background-color: #E7EBF1;
 }
 
@@ -54,7 +54,7 @@
     background-color: #ffffff;
 }
 
-/* 메시지 전송 폼 */
+  /* 메시지 전송 폼 */
 .chatbot-form {
     display: flex;
     padding: 10px;
@@ -85,10 +85,9 @@
 }
 
 
-/* 아이콘을 넣을 빈 공간 */
+  /* 아이콘을 넣을 빈 공간 */
 .message-icon {
-    width: 40px;
-    /* 아이콘의 크기를 지정 */
+    width: 40px; /* 아이콘의 크기를 지정 */
     height: 40px;
     margin-right: 10px;
 }
