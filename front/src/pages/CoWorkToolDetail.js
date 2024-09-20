@@ -6,10 +6,11 @@ import {
   uploadBytesResumable,
   getDownloadURL,
   listAll,
+  deleteObject,
 } from "firebase/storage";
 import { storage } from "./firebase"; // Firebase 설정 파일
-import "./CoWorkToolDetail.css";
 import WikiBoard from "../components/WikiBoard";
+import styles from "./CoWorkToolDetail.module.css"; // CSS Modules 방식으로 불러오기
 
 function TeamBoard() {
   const { teamId } = useParams(); // 팀 ID를 URL에서 가져옴
@@ -26,7 +27,6 @@ function TeamBoard() {
   // 팀원 정보 가져오기
   async function fetchTeamMembers() {
     const token = localStorage.getItem("token");
-    console.log("팀 아이디 : ", teamId);
 
     try {
       const response = await axios.get(
@@ -37,14 +37,7 @@ function TeamBoard() {
           },
         }
       );
-
       setTeamMembers(response.data); //팀원 정보 저장
-
-      if (response.status === 200) {
-        console.log("성공적으로 팀원 정보를 가져왔습니다!");
-      } else {
-        console.log("뭔가 이상함");
-      }
     } catch (error) {
       console.error("Error fetching team members", error);
     }
@@ -55,16 +48,15 @@ function TeamBoard() {
     const folderRef = ref(storage, `teams/${teamId}/`);
     try {
       const result = await listAll(folderRef);
-
       const filePromises = result.items.map((itemRef) =>
         getDownloadURL(itemRef).then((url) => ({
           name: itemRef.name,
           url,
+          fullPath: itemRef.fullPath,
         }))
       );
-
       const fileList = await Promise.all(filePromises);
-      setFiles(fileList);
+      setFiles(fileList); // 파일 목록 설정
     } catch (error) {
       console.error("Error fetching files", error);
     }
@@ -89,7 +81,14 @@ function TeamBoard() {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            setFiles((prevFiles) => [...prevFiles, { name: file.name, url }]); // 업로드된 파일 목록 갱신
+            setFiles((prevFiles) => [
+              ...prevFiles,
+              {
+                name: file.name,
+                url,
+                fullPath: uploadTask.snapshot.ref.fullPath,
+              },
+            ]); // 업로드된 파일 목록 갱신
           });
         }
       );
@@ -102,11 +101,24 @@ function TeamBoard() {
     setNewFiles(files); // 업로드할 파일 목록 설정
   }
 
+  // 파일 삭제 처리
+  async function handleDeleteFile(fullPath) {
+    const fileRef = ref(storage, fullPath);
+    try {
+      await deleteObject(fileRef);
+      setFiles((prevFiles) =>
+        prevFiles.filter((file) => file.fullPath !== fullPath)
+      );
+    } catch (error) {
+      console.error("Error deleting file", error);
+    }
+  }
+
   return (
-    <div className="team-board-container">
+    <div className={styles["team-board-container"]}>
       {/* 팀원 소개 및 역할 */}
-      <section className="team-members">
-        <h3>팀원 소개 및 역할</h3>
+      <section className={styles["team-members"]}>
+        <h3>팀원</h3>
         <ul>
           {teamMembers.map((member) => (
             <li key={member.id}>{member.nickname}</li>
@@ -115,8 +127,8 @@ function TeamBoard() {
       </section>
 
       {/* 파일 관리 및 버전 관리 */}
-      <section className="file-management">
-        <h3>파일 관리 및 버전 관리</h3>
+      <section className={styles["file-management"]}>
+        <h3>파일 관리</h3>
         <div>
           <h4>업로드된 파일들:</h4>
           <ul>
@@ -125,20 +137,18 @@ function TeamBoard() {
                 <a href={file.url} target="_blank" rel="noopener noreferrer">
                   {file.name}
                 </a>
+                <button onClick={() => handleDeleteFile(file.fullPath)}>
+                  삭제
+                </button>
               </li>
             ))}
           </ul>
         </div>
         <form onSubmit={handleFileUpload}>
-          <input
-            type="file"
-            /*webkitdirectory="true"*/
-            multiple
-            onChange={handleFileSelection}
-          />
-          <button type="submit">파일 및 폴더 업로드</button>
+          <input type="file" multiple onChange={handleFileSelection} />
+          <button type="submit">파일 업로드</button>
         </form>
-        {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+        {uploadProgress > 0 && <p>업로드 진행률: {uploadProgress}%</p>}
       </section>
 
       {/* Wiki 문서 관리 */}
