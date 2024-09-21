@@ -14,8 +14,16 @@ function WikiBoard({ teamId }) {
 
   // 문서 불러오기
   async function fetchWikiContent() {
+    const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`http://localhost:8080/wiki/${teamId}`);
+      const response = await axios.get(
+        `http://localhost:8080/api/board/team/${teamId}/wiki`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setWikiContent(response.data.content);
     } catch (error) {
       console.error("Error fetching wiki content", error);
@@ -24,13 +32,17 @@ function WikiBoard({ teamId }) {
 
   // 문서 저장하기 (수정)
   async function handleSavePage() {
+    const token = localStorage.getItem("token");
     try {
-      const pageData = {
-        title,
-        content: wikiContent,
-      };
-
-      await axios.put(`http://localhost:8080/wiki/${teamId}`, pageData);
+      await axios.put(
+        `http://localhost:8080/api/board/team/${teamId}/wiki`,
+        { content: wikiContent },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setEditMode(false); // 편집 모드 종료
     } catch (error) {
       console.error("Error saving wiki page", error);
