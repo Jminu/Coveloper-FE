@@ -67,12 +67,6 @@ function AllPostsContent() {
 
   return (
     <div className="post-list-container">
-      {/*
-      <header>
-        <h2>전체 글 게시판</h2>
-      </header>
-      <hr></hr>
-      */}
       <section className="post-list-section">
         {posts.map((post) => (
           <article
