@@ -81,7 +81,7 @@
 
 .file-management button {
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #6478b4;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -89,5 +89,5 @@
 }
 
 .file-management button:hover {
-  background-color: #0056b3;
+  background-color: #0e3672;
 }
