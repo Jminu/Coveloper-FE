@@ -21,7 +21,8 @@
 .team-members {
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 2px solid #0e3672;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -47,7 +48,8 @@
 .file-management {
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 2px solid #0e3672;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
