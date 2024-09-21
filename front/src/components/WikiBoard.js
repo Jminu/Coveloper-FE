@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Markdown from "markdown-to-jsx";
-import "./WikiBoard.css";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { prism } from "react-syntax-highlighter/dist/esm/styles/prism"; // 선택한 하이라이트 스타일
+import styles from "./WikiBoard.module.css";
 
 function WikiBoard({ teamId }) {
   const [wikiContent, setWikiContent] = useState(""); // 위키 문서 내용
@@ -49,8 +51,18 @@ function WikiBoard({ teamId }) {
     }
   }
 
+  // Markdown 렌더링에서 코드 블록을 하이라이팅하기 위한 커스텀 컴포넌트
+  const CodeBlock = ({ children, className }) => {
+    const language = className ? className.replace("lang-", "") : "javascript"; // 언어 추출
+    return (
+      <SyntaxHighlighter language={language} style={prism}>
+        {children}
+      </SyntaxHighlighter>
+    );
+  };
+
   return (
-    <div className="wiki-board-container">
+    <div className={styles["wiki-board-container"]}>
       <h3>{title}</h3>
       {editMode ? (
         <div>
@@ -63,7 +75,17 @@ function WikiBoard({ teamId }) {
         </div>
       ) : (
         <div>
-          <Markdown>{wikiContent}</Markdown>
+          <Markdown
+            options={{
+              overrides: {
+                code: {
+                  component: CodeBlock, // 커스텀 코드 블록 렌더러
+                },
+              },
+            }}
+          >
+            {wikiContent}
+          </Markdown>
           <button onClick={() => setEditMode(true)}>문서 수정</button>
         </div>
       )}
