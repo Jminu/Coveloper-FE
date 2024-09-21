@@ -40,6 +40,19 @@ function CoWorkToolContent({ isLoggedIn }) {
     navigate(`/teams/${teamId}`);
   }
 
+  // 날짜 포맷 함수
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   return (
     <div className="post-list-container">
       <header>
@@ -57,7 +70,7 @@ function CoWorkToolContent({ isLoggedIn }) {
             <footer>
               <span>프로젝트 인원: {post.teamSize}</span>
               <br></br>
-              <span>작성일: {post.createdAt}</span>
+              <span>작성일: {formatDate(post.createdAt)}</span>
             </footer>
           </article>
         ))}

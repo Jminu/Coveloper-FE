@@ -78,6 +78,17 @@
   font-weight: bold; /* 채택된 댓글의 작성자 정보 강조 */
 }
 
+.upvote-and-team-container {
+  display: flex;
+  align-items: center;
+  gap: 650px;
+}
+
+.team-icon {
+  display: flex;
+  gap: 5px;
+}
+
 .upvote-container {
   display: flex;
   align-items: center;
