@@ -14,6 +14,7 @@ import FindPeopleContent from "../components/FindPeopleContent";
 import CalendarComponent from "../components/Calendar";
 import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
+import ChatBot from "../components/ChatBot";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -186,6 +187,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
         <div className={styles.frameContainer}>
           {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
           <CalendarComponent />
+          <ChatBot />
         </div>
       </main>
       <div className={styles.div11} />

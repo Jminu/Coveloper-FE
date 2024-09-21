@@ -415,15 +415,14 @@
   display: none;
   max-width: 100%;
 }
-.communityForDeveloper1 {
-  width: 355px;
-  position: relative;
+.communityForDeveloper1, .coveloperContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  z-index: 2;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  text-align: center;
+  width: 100%; /* 전체 너비 사용 */
 }
+
 .coveloper1 {
   margin: 0;
   flex: 1;

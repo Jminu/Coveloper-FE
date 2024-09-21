@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addMonths, format, subMonths, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay, isSameMonth } from "date-fns";
+import axios from 'axios';
 import './CalendarPage.css';
 
 const CalendarPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [isScheduleVisible, setIsScheduleVisible] = useState(0);
-    const [schedules, setSchedules] = useState({}); // 일정 데이터를 날짜별로 저장하는 객체
+    const [schedules, setSchedules] = useState({});
     const [schedule, setSchedule] = useState('');
 
-    const today = new Date(); // 오늘 날짜
+    const today = new Date();
 
     const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
     const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
@@ -26,16 +27,39 @@ const CalendarPage = () => {
     let day = startDate;
     let formattedDate = '';
 
+    // 백엔드에서 메모 데이터를 가져오는 함수
+    const fetchMemos = async (year, month) => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/calendar/memos', {
+                params: { year, month }
+            });
+            const fetchedSchedules = {};
+            response.data.forEach(item => {
+                fetchedSchedules[item.date] = [item.memo]; // 메모 데이터를 스케줄로 매핑
+            });
+            setSchedules(fetchedSchedules);
+        } catch (error) {
+            console.error('메모를 가져오는 중 오류 발생:', error);
+        }
+    };
+
+    // 페이지 로드 시 현재 월의 메모 데이터를 가져오기
+    useEffect(() => {
+        const year = format(currentMonth, 'yyyy');
+        const month = format(currentMonth, 'M');
+        fetchMemos(year, month);
+    }, [currentMonth]);
+
     const handleScheduleVisible = (e) => {
         const clickedDate = e.currentTarget.getAttribute('value');
-        setSelectedDate(clickedDate); // 선택된 날짜 업데이트
-        setIsScheduleVisible(clickedDate); // 모달 창에 표시할 날짜 업데이트
+        setSelectedDate(clickedDate);
+        setIsScheduleVisible(clickedDate);
     };
 
     while (day <= endDate) {
         for (let i = 0; i < 7; i++) {
-            formattedDate = format(day, 'yyyy-MM-dd'); // 날짜 형식을 'yyyy-MM-dd'로 통일
-            const isToday = isSameDay(day, today); // 오늘 날짜와 비교
+            formattedDate = format(day, 'yyyy-MM-dd');
+            const isToday = isSameDay(day, today);
 
             days.push(
                 <div
@@ -45,7 +69,7 @@ const CalendarPage = () => {
                         : isSameDay(day, new Date(selectedDate))
                         ? 'selected'
                         : 'valid'
-                    } day_${i} ${isToday ? 'today' : ''}`} // 오늘 날짜에 'today' 클래스 추가
+                    } day_${i} ${isToday ? 'today' : ''}`}
                     key={day}
                     value={formattedDate}
                     onClick={handleScheduleVisible}
@@ -67,25 +91,33 @@ const CalendarPage = () => {
 
     const handleSchedule = (e) => setSchedule(e.target.value);
 
-    const onCreateNewSchedule = () => {
+    // 메모를 백엔드에 저장하는 함수
+    const onCreateNewSchedule = async () => {
         if (!schedule) return;
 
-        // 해당 날짜의 기존 일정을 불러오고 없으면 빈 배열로 초기화
-        const currentSchedules = schedules[isScheduleVisible] || [];
+        try {
+            await axios.post('http://localhost:8080/api/calendar/memo', {
+                date: isScheduleVisible,
+                memo: schedule,
+            });
 
-        // 해당 날짜에 새로운 일정 추가
-        const updatedSchedules = {
-            ...schedules,
-            [isScheduleVisible]: [...currentSchedules, schedule],
-        };
+            // 새로 추가된 메모를 로컬 상태에 업데이트
+            const currentSchedules = schedules[isScheduleVisible] || [];
+            const updatedSchedules = {
+                ...schedules,
+                [isScheduleVisible]: [...currentSchedules, schedule],
+            };
 
-        setSchedules(updatedSchedules); // 상태 업데이트
-        setSchedule(''); // 입력 필드 초기화
+            setSchedules(updatedSchedules);
+            setSchedule(''); // 입력 필드 초기화
+        } catch (error) {
+            console.error('메모 저장 중 오류 발생:', error);
+        }
     };
 
     const closeModal = () => {
-        setIsScheduleVisible(0); // 모달 닫기
-        setSelectedDate(null); // 선택한 날짜 초기화
+        setIsScheduleVisible(0);
+        setSelectedDate(null);
     };
 
     return (
@@ -100,8 +132,8 @@ const CalendarPage = () => {
                     </div>
                 </div>
                 <div className='right-col'>
-                    <button className='month-button' onClick={prevMonth}>{'<<'}</button> {/* << 로 표시 */}
-                    <button className='month-button' onClick={nextMonth}>{'>>'}</button> {/* >> 로 표시 */}
+                    <button className='month-button' onClick={prevMonth}>{'<<'}</button>
+                    <button className='month-button' onClick={nextMonth}>{'>>'}</button>
                 </div>
             </div>
 
