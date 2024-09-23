@@ -323,7 +323,7 @@ function PostDetail() {
               <footer>
                 <span>작성자: {comment.authorName}</span>
                 <br />
-                <span>작성일: {comment.createdAt}</span>
+                <span>작성일: {formatDate(comment.createdAt)}</span>
               </footer>
               {/* 채택된 댓글은 일반 사용자도 확인할 수 있도록 아이콘 표시 */}
               {comment.selected && (
