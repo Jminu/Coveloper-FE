@@ -65,26 +65,28 @@ function WikiBoard({ teamId }) {
     <div className={styles["wiki-board-container"]}>
       <h3>{title}</h3>
       {editMode ? (
-        <div className={styles["editor-and-preview"]}>
-          <div className={styles["editor"]}>
-            <textarea
-              value={wikiContent}
-              onChange={(e) => setWikiContent(e.target.value)} // 실시간 업데이트
-              placeholder="문서 내용을 입력하세요..."
-            ></textarea>
-          </div>
-          <div className={styles["preview"]}>
-            <Markdown
-              options={{
-                overrides: {
-                  code: {
-                    component: CodeBlock, // 커스텀 코드 블록 렌더러
+        <div>
+          <div className={styles["editor-and-preview"]}>
+            <div className={styles["editor"]}>
+              <textarea
+                value={wikiContent}
+                onChange={(e) => setWikiContent(e.target.value)} // 실시간 업데이트
+                placeholder="문서 내용을 입력하세요..."
+              ></textarea>
+            </div>
+            <div className={styles["preview"]}>
+              <Markdown
+                options={{
+                  overrides: {
+                    code: {
+                      component: CodeBlock, // 커스텀 코드 블록 렌더러
+                    },
                   },
-                },
-              }}
-            >
-              {wikiContent}
-            </Markdown>
+                }}
+              >
+                {wikiContent}
+              </Markdown>
+            </div>
           </div>
           <button onClick={handleSavePage}>저장</button>
         </div>
