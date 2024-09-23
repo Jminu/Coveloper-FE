@@ -88,7 +88,9 @@ function WikiBoard({ teamId }) {
               </Markdown>
             </div>
           </div>
-          <button onClick={handleSavePage}>저장</button>
+          <button className={styles["save-button"]} onClick={handleSavePage}>
+            저장
+          </button>
         </div>
       ) : (
         <div>
@@ -103,7 +105,12 @@ function WikiBoard({ teamId }) {
           >
             {wikiContent}
           </Markdown>
-          <button onClick={() => setEditMode(true)}>문서 수정</button>
+          <button
+            className={styles["edit-button"]}
+            onClick={() => setEditMode(true)}
+          >
+            문서 수정
+          </button>
         </div>
       )}
     </div>
