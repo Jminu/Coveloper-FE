@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Main2.module.css";
 import AllPostsContent from "./AllPostsContent";
+import TopPosts from "./TopPosts";
 
 function HomeContent() {
   return (
@@ -14,7 +15,7 @@ function HomeContent() {
           <h1 className={styles.coveloper1}>coveloper</h1>
         </div>
       </div>
-      <AllPostsContent />
+      <TopPosts />
     </div>
   );
 }

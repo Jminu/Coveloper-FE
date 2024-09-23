@@ -15,6 +15,7 @@ import CalendarComponent from "../components/Calendar";
 import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
 import ChatBot from "../components/ChatBot";
+import CalendarPage from "./CalendarPage";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -44,6 +45,8 @@ const Main = ({ isLoggedIn, userInfo }) => {
         return <MyPosts />;
       case "협업 도구":
         return <CoWorkToolContent isLoggedIn />;
+      case "캘린더":
+        return <CalendarPage />;
       default:
         return <HomeContent />;
     }
@@ -165,7 +168,6 @@ const Main = ({ isLoggedIn, userInfo }) => {
                   </div>
                 </div>
                 <div className={styles.navbarItems2}>
-                  {/*" "*/}
                   {/**비전공자 추천 로드맵 버튼 */}
                   <div className={styles.monthWeeksChild} />
                   <img
@@ -174,8 +176,11 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     src="/carbonloadbalancerglobal.svg"
                   />
                   <div className={styles.frameDiv}>
-                    <div className={styles.coveloperChatbot}>
-                      비전공자 추천 로드맵
+                    <div
+                      className={styles.coveloperChatbot}
+                      onClick={() => onClickMenu("캘린더")}
+                    >
+                      캘린더
                     </div>
                   </div>
                 </div>
