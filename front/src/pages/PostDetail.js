@@ -20,6 +20,7 @@ function PostDetail() {
   const [authorName, setAuthorName] = useState(""); //글 작성자 ID
   const [currentUserName, setCurrentUserName] = useState(""); //로그인한 사용자 이름
   const [boardType, setBoardType] = useState(""); //게시판 타입
+  const [peopleAdded, setPeopleAdded] = useState({}); //인원 추가 여부 저장
 
   useEffect(() => {
     fetchPostDetails();
@@ -189,6 +190,10 @@ function PostDetail() {
 
       if (response.status === 200) {
         alert("팀에 추가되었습니다.");
+        setPeopleAdded((prevState) => ({
+          ...prevState,
+          [commentId]: true,
+        }));
       } else {
         alert("인원 추가에 실패했습니다. 다시 시도해주세요.");
       }
@@ -250,6 +255,24 @@ function PostDetail() {
       minute: "2-digit",
       second: "2-digit",
     });
+  }
+
+  // 팀원 추가 아이콘 렌더링
+  function renderAddPeopleIcon(commentId) {
+    return peopleAdded[commentId] ? (
+      <img
+        src="/people-check.svg" // 인원이 추가되었을 때 보여줄 아이콘
+        alt="인원 추가 완료"
+        className="people-plus-icon"
+      />
+    ) : (
+      <img
+        src="/people-plus.svg" // 인원을 추가하기 전 기본 아이콘
+        alt="인원 추가"
+        className="people-plus-icon"
+        onClick={() => onClickAddPeople(commentId)}
+      />
+    );
   }
 
   if (!post) return <div>Loading...</div>;
@@ -352,12 +375,7 @@ function PostDetail() {
               {boardType === "RECRUITMENT" &&
                 currentUserName === post.authorName && (
                   <div className="people-plus-container">
-                    <img
-                      src="/people-plus.svg"
-                      alt="인원추가"
-                      className="people-plus-icon"
-                      onClick={() => onClickAddPeople(comment.id)}
-                    />
+                    {renderAddPeopleIcon(comment.id)}
                   </div>
                 )}
             </div>
