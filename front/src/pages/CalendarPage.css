@@ -1,200 +1,197 @@
 .calendar {
-    position: absolute; /* 위치를 절대값으로 설정 */
-    top: 20px; /* 상단에서 20px 아래 */
-    left: 450px; /* 왼쪽에서 390px 위치 */
-    gap: 20px; /* 내부 요소 간의 간격 추가 */
-    padding-top: 20px; /* 캘린더 상단 간격 추가 */
+  position: absolute; /* 위치를 절대값으로 설정 */
+  top: 20px; /* 상단에서 20px 아래 */
+  left: 450px; /* 왼쪽에서 390px 위치 */
+  gap: 20px; /* 내부 요소 간의 간격 추가 */
+  padding-top: 20px; /* 캘린더 상단 간격 추가 */
 }
 
 .Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #B7C3D5;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 800px; 
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b7c3d5;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .left-col {
-    display: flex;
-    margin: 10px;
+  display: flex;
+  margin: 10px;
 }
 
 .current-month {
-    font-size: 24px;
-    font-weight: 600;
-    color: rgba(4, 4, 4, 0.774);
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(4, 4, 4, 0.774);
 }
 
 .current-year {
-    align-self: flex-end;
-    margin-left: 5px;
-    font-size: 16px;
-    font-weight: 400;
-    color: rgb(72, 68, 68);
+  align-self: flex-end;
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(72, 68, 68);
 }
 
 .right-col {
-    margin: 10px;
-    align-self: center;
+  margin: 10px;
+  align-self: center;
 }
 
 .month-button {
-    border-radius: 5px;
-    border: 0px solid rgb(72, 68, 68);
-    margin-left: 20px;
-    font-size: 24px;
-    cursor: pointer;
+  border-radius: 5px;
+  border: 0px solid rgb(72, 68, 68);
+  margin-left: 20px;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 /* 요일 */
 /* 요일 부분 */
 .days-list {
-    display: flex;
-    justify-content: center;
-    width: 800px; 
-    padding: 0;
-    margin: 0 5;
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  padding: 0;
+  margin: 0 5;
 }
 
 .days {
-    list-style: none;
-    border-radius: 8px;
-    width: 90px;
-    background-color: #E7EBF1;
-    text-align: center;      /* 텍스트를 중앙에 정렬 */
-    padding: 10px ;         /* 위아래 패딩 추가 */
-    margin: 0 5px;          /* 좌우 간격 추가 */
+  list-style: none;
+  border-radius: 8px;
+  width: 90px;
+  background-color: #e7ebf1;
+  text-align: center; /* 텍스트를 중앙에 정렬 */
+  padding: 10px; /* 위아래 패딩 추가 */
+  margin: 0 5px; /* 좌우 간격 추가 */
 }
 
 .days_0 {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .days_6 {
-    margin-right: 0;
+  margin-right: 0;
 }
-
 
 /* 날짜 */
 .row {
-    max-width: 820px; /* Header와 요일과 일관성 있게 설정 */
-    display: flex;
-    margin-bottom: 10px;
+  max-width: 820px; /* Header와 요일과 일관성 있게 설정 */
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .day-disabled,
 .day-valid,
 .day-selected {
-    border-radius: 10px;
-    width: 140px; 
-    height: 90px;
-    background-color: white;
-    margin: 0 5px;
+  border-radius: 10px;
+  width: 140px;
+  height: 90px;
+  background-color: white;
+  margin: 0 5px;
 }
 
 .day_0 {
-    margin-left: 0;
+  margin-left: 0;
 }
-s
-.day_6 {
-    margin-right: 0;
+s .day_6 {
+  margin-right: 0;
 }
 
 .day-disabled {
-    border: 0px solid rgb(208, 203, 203);
+  border: 0px solid rgb(208, 203, 203);
 }
 
 .day-selected {
-    background-color: #E7EBF1;
+  background-color: #e7ebf1;
 }
 
 .today {
-    border: 0.5px solid rgb(189, 189, 189); /* 원하는 색상으로 변경 */
+  border: 0.5px solid rgb(189, 189, 189); /* 원하는 색상으로 변경 */
 }
 
 .text-not-valid,
 .text-valid {
-    display: flex;
-    padding: 10px;
+  display: flex;
+  padding: 10px;
 }
 
 .text-not-valid {
-    color: rgb(208, 203, 203);
+  color: rgb(208, 203, 203);
 }
 
 /* 스케줄 */
 
 .CalendarSchedule {
-    position: absolute;
-    top: 20px;
-    right: calc(75% - 980px);
-    width: 350px;
-    height: 600px;
-    border-radius: 5px;
-    background-color: #E7EBF1;
-    opacity: 90%;
+  position: absolute;
+  top: 20px;
+  right: calc(75% - 980px);
+  width: 350px;
+  height: 600px;
+  border-radius: 5px;
+  background-color: #e7ebf1;
+  opacity: 90%;
 }
 
 .CalendarSchedule h1 {
-    margin-top: 30px;
-    font-size: 25px;
-    padding-left: 30px;
-    font-weight: 400;
-    color:rgb(36, 36, 36);
+  margin-top: 30px;
+  font-size: 25px;
+  padding-left: 30px;
+  font-weight: 400;
+  color: rgb(36, 36, 36);
 }
 
 .modal-close-button {
-    border: transparent;
-    background-color: #E7EBF1;
-    font-size: 20px;
-    font-weight: 300;
-    cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 20px;
+  border: transparent;
+  background-color: #e7ebf1;
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+  position: absolute;
+  top: 7px;
+  right: 20px;
 }
 
 .new-schedule-wrapper {
-    display: flex;
+  display: flex;
 }
 
 .new-schedule-button {
-    border: 0.5px solid rgb(115, 115, 115);
-    border-radius: 8px;
-    height: 30px;
-    margin: 0px;
-    margin-right: auto;
-    cursor: pointer;
-    font-weight: 500;
+  border: 0.5px solid rgb(115, 115, 115);
+  border-radius: 8px;
+  height: 30px;
+  margin: 0px;
+  margin-right: auto;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .new-schedule-input {
-    border: 0.5px solid rgb(149, 149, 149);
-    border-radius: 8px;
-    height: 27px;
-    padding: 0;
-    margin-right: 5px;
-    margin-left: 30px;
+  border: 0.5px solid rgb(149, 149, 149);
+  border-radius: 8px;
+  height: 27px;
+  padding: 0;
+  margin-right: 5px;
+  margin-left: 30px;
 }
 
 .schedule-item-wrapper {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    padding-top: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  padding-top: 10px;
 }
 
 .schedule-item {
-    list-style: square;
-    list-style-position: inside; /* 마커를 텍스트 안쪽에 배치 */
-    font-weight: 400;
-    margin-left: 100;
-    margin-bottom: 10px;
-    padding-left: 60px;
-    
+  list-style: square;
+  list-style-position: inside; /* 마커를 텍스트 안쪽에 배치 */
+  font-weight: 400;
+  margin-left: 100;
+  margin-bottom: 10px;
+  padding-left: 60px;
 }

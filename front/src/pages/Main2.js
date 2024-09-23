@@ -19,11 +19,17 @@ import CalendarPage from "./CalendarPage";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
+  const [showSidebar, setShowSidebar] = useState(true);
   const navigate = useNavigate();
 
   function onClickMenu(menuName) {
     console.log(`${menuName} 클릭`);
     setSelectedMenu(menuName);
+    if (menuName === "캘린더") {
+      setShowSidebar(false);
+    } else {
+      setShowSidebar(true);
+    }
   }
 
   function onClickLogo() {
@@ -167,21 +173,19 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     <div className={styles.coveloperChatbot}>협업 도구</div>
                   </div>
                 </div>
-                <div className={styles.navbarItems2}>
-                  {/**비전공자 추천 로드맵 버튼 */}
+                <div
+                  className={styles.navbarItems2}
+                  onClick={() => onClickMenu("캘린더")}
+                >
+                  {/**캘린더 버튼 */}
                   <div className={styles.monthWeeksChild} />
                   <img
                     className={styles.carbonloadBalancerGlobalIcon}
                     alt=""
-                    src="/carbonloadbalancerglobal.svg"
+                    src="/calendar.svg"
                   />
                   <div className={styles.frameDiv}>
-                    <div
-                      className={styles.coveloperChatbot}
-                      onClick={() => onClickMenu("캘린더")}
-                    >
-                      캘린더
-                    </div>
+                    <div className={styles.coveloperChatbot}>캘린더</div>
                   </div>
                 </div>
               </div>
@@ -189,11 +193,14 @@ const Main = ({ isLoggedIn, userInfo }) => {
           </div>
           <div className={styles.frameWrapper}>{renderContent()}</div>
         </section>
-        <div className={styles.frameContainer}>
-          {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
-          <CalendarComponent />
-          <ChatBot />
-        </div>
+        {/**우측 사이드바는 showSidebar가 true일 때만 표시*/}
+        {showSidebar && (
+          <div className={styles.frameContainer}>
+            {/*여기에 우측 사이드 메뉴 들어갈 부분 */}
+            <CalendarComponent />
+            <ChatBot />
+          </div>
+        )}
       </main>
       <div className={styles.div11} />
       <div className={styles.mainInner}></div>
