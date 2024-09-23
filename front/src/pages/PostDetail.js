@@ -347,10 +347,8 @@ function PostDetail() {
                       className="check-button"
                       onClick={() => handleSelectComment(comment.id)}
                     />
-<<<<<<< HEAD
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
               {boardType === "RECRUITMENT" &&
                 currentUserName === post.authorName && (
                   <div className="people-plus-container">
