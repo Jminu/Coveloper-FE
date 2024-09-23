@@ -347,16 +347,17 @@ function PostDetail() {
                   )}
                 </div>
               )}
-              {boardType === "RECRUITMENT" && (
-                <div className="people-plus-container">
-                  <img
-                    src="/people-plus.svg"
-                    alt="인원추가"
-                    className="people-plus-icon"
-                    onClick={() => onClickAddPeople(comment.id)}
-                  />
-                </div>
-              )}
+              {boardType === "RECRUITMENT" &&
+                currentUserName === post.authorName && (
+                  <div className="people-plus-container">
+                    <img
+                      src="/people-plus.svg"
+                      alt="인원추가"
+                      className="people-plus-icon"
+                      onClick={() => onClickAddPeople(comment.id)}
+                    />
+                  </div>
+                )}
             </div>
           ))
         ) : (
