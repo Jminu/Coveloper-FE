@@ -39,6 +39,8 @@ function WriteFindPeople({ isLoggedIn }) {
       currentMembers,
     };
 
+    console.log(postData);
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/board/post",
@@ -96,7 +98,9 @@ function WriteFindPeople({ isLoggedIn }) {
             type="number"
             id="teamSize"
             value={teamSize}
-            onChange={(e) => setTeamSize(Number(e.target.value))}
+            onChange={(e) =>
+              setTeamSize(e.target.value ? Number(e.target.value) : "")
+            }
             min="1"
             max="10"
             required

@@ -325,25 +325,29 @@ function PostDetail() {
                 <br />
                 <span>작성일: {comment.createdAt}</span>
               </footer>
+              {/* 채택된 댓글은 일반 사용자도 확인할 수 있도록 아이콘 표시 */}
+              {comment.selected && (
+                <div className="check-container">
+                  <img
+                    src="/check-fill.svg" // 채택된 댓글용 아이콘
+                    alt="채택된 댓글"
+                    className="check-button"
+                  />
+                </div>
+              )}
               {/* 글 작성자일 경우에만 채택 버튼 표시 */}
               {/* boardType에 따라 버튼을 조건부로 표시 */}
-              {boardType === "QNA" && currentUserName === post.authorName && (
-                <div className="check-container">
-                  {comment.selected ? (
-                    // 채택된 댓글은 다른 아이콘을 표시하고 onClick을 제거함
-                    <img
-                      src="/check-fill.svg" // 채택된 댓글용 아이콘
-                      alt="채택된 댓글"
-                      className="check-button"
-                    />
-                  ) : (
-                    // 채택되지 않은 댓글은 기존 아이콘과 onClick을 유지
+              {boardType === "QNA" &&
+                currentUserName === post.authorName &&
+                !comment.selected && (
+                  <div className="check-container">
                     <img
                       src="/check.svg"
                       alt="채택"
                       className="check-button"
                       onClick={() => handleSelectComment(comment.id)}
                     />
+<<<<<<< HEAD
                   )}
                 </div>
               )}
