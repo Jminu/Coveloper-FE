@@ -15,6 +15,9 @@ import WikiBoard from "../components/WikiBoard";
 import styles from "./CoWorkToolDetail.module.css"; // CSS Modules 방식으로 불러오기
 import { getUserInfo } from "../utils/auth";
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { prism } from "react-syntax-highlighter/dist/esm/styles/prism"; // 하이라이팅 스타일
+
 function TeamBoard() {
   const { teamId } = useParams(); // 팀 ID를 URL에서 가져옴
   const [teamMembers, setTeamMembers] = useState([]); // 팀 멤버 목록
@@ -22,6 +25,8 @@ function TeamBoard() {
   const [newFiles, setNewFiles] = useState([]); // 업로드할 파일 목록
   const [uploadProgress, setUploadProgress] = useState(0); // 업로드 진행률
   const [userInfo, setUserInfo] = useState(null); // 사용자 정보 저장
+  const [previewContent, setPreviewContent] = useState(""); //파일 미리보기 내용 저장
+  const [previewFileType, setPreviewFileType] = useState(""); // 파일 타입 저장
 
   useEffect(() => {
     fetchTeamMembers(); // 팀원 정보 불러오기
@@ -141,6 +146,33 @@ function TeamBoard() {
     }
   }
 
+  // 파일 미리보기 처리
+  async function handlePreviewFile(file) {
+    try {
+      const response = await fetch(file.url);
+      const text = await response.text();
+      setPreviewContent(text); // 미리보기 내용 설정
+
+      // 파일 확장자 추출
+      const extension = file.name.split(".").pop().toLowerCase();
+      setPreviewFileType(extension); // 파일 타입 설정
+    } catch (error) {
+      console.error("Error previewing file", error);
+    }
+  }
+
+  // 하이라이팅 처리 여부에 따른 렌더링
+  function renderPreview() {
+    if (["js", "java", "c", "html", "css"].includes(previewFileType)) {
+      return (
+        <SyntaxHighlighter language={previewFileType} style={prism}>
+          {previewContent}
+        </SyntaxHighlighter>
+      );
+    }
+    return <pre>{previewContent}</pre>; // 텍스트 파일의 경우
+  }
+
   return (
     <div className={styles["team-board-container"]}>
       {/* 팀원 소개 및 역할 */}
@@ -170,10 +202,19 @@ function TeamBoard() {
                 <button onClick={() => handleDeleteFile(file.fullPath)}>
                   삭제
                 </button>
+                <button onClick={() => handlePreviewFile(file)}>
+                  미리보기
+                </button>
               </li>
             ))}
           </ul>
         </div>
+        {previewContent && (
+          <div className={styles["file-preview"]}>
+            <h4>파일 미리보기:</h4>
+            {renderPreview()} {/* 코드 하이라이팅 적용 */}
+          </div>
+        )}
         <form onSubmit={handleFileUpload}>
           <input type="file" multiple onChange={handleFileSelection} />
           <button type="submit">파일 업로드</button>
