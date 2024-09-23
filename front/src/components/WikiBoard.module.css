@@ -1,62 +1,27 @@
 .wiki-board-container {
-  background-color: #fff;
   padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #0e3672;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
-.wiki-board-container h3 {
-  font-size: 1.5rem;
-  color: #333;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+.editor-and-preview {
+  display: flex;
+  justify-content: space-between;
 }
 
-.wiki-board-container textarea {
+.editor {
+  width: 45%;
+}
+
+.preview {
+  width: 45%;
+  padding-left: 20px;
+  border-left: 0px solid #0e3672;
+}
+
+textarea {
   width: 100%;
-  min-height: 200px;
+  height: 300px;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  resize: vertical;
-}
-
-.wiki-board-container button {
-  padding: 10px 20px;
-  background-color: #6478b4;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.wiki-board-container button:hover {
-  background-color: #0e3672;
-}
-
-.wiki-board-container .markdown {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.wiki-board-container .edit-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  background-color: #6478b4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.wiki-board-container .edit-button:hover {
-  background-color: #0e3672;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 2px solid #0e3672;
 }
