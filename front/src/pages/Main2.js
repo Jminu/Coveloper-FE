@@ -160,7 +160,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     src="/humbleiconschat.svg"
                   />
                   <div className={styles.coveloperChatbotWrapper}>
-                    <div className={styles.coveloperChatbot}>도우미</div>
+                    <div className={styles.coveloperChatbot}>코딩 도우미</div>
                   </div>
                 </div>
                 <div
@@ -174,7 +174,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     src="/ricodeboxfill1.svg"
                   />
                   <div className={styles.monthWeeksInner}>
-                    <div className={styles.coveloperChatbot}>협업 도구</div>
+                    <div className={styles.coveloperChatbot}>코딩 라운지</div>
                   </div>
                 </div>
                 <div
