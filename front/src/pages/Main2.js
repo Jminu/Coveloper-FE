@@ -16,6 +16,7 @@ import MyPosts from "../components/MyPosts";
 import CoWorkToolContent from "../components/CoWorkToolContent";
 import ChatBot from "../components/ChatBot";
 import CalendarPage from "./CalendarPage";
+import MainChatbot from "../components/MainChatbot";
 
 const Main = ({ isLoggedIn, userInfo }) => {
   const [selectedMenu, setSelectedMenu] = useState("홈");
@@ -25,7 +26,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
   function onClickMenu(menuName) {
     console.log(`${menuName} 클릭`);
     setSelectedMenu(menuName);
-    if (menuName === "캘린더") {
+    if (menuName === "캘린더" || menuName === "코딩 도우미") {
       setShowSidebar(false);
     } else {
       setShowSidebar(true);
@@ -53,6 +54,8 @@ const Main = ({ isLoggedIn, userInfo }) => {
         return <CoWorkToolContent isLoggedIn />;
       case "캘린더":
         return <CalendarPage />;
+      case "코딩 도우미":
+        return <MainChatbot />;
       default:
         return <HomeContent />;
     }
@@ -145,7 +148,10 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     <div className={styles.coveloperChatbot}>구인게시판</div>
                   </div>
                 </div>
-                <div className={styles.loginButtonContainer}>
+                <div
+                  className={styles.loginButtonContainer}
+                  onClick={() => onClickMenu("코딩 도우미")}
+                >
                   {/**챗봇 게시판 버튼 */}
                   <div className={styles.monthWeeksChild} />
                   <img
@@ -154,9 +160,7 @@ const Main = ({ isLoggedIn, userInfo }) => {
                     src="/humbleiconschat.svg"
                   />
                   <div className={styles.coveloperChatbotWrapper}>
-                    <div className={styles.coveloperChatbot}>
-                      Coveloper Chatbot
-                    </div>
+                    <div className={styles.coveloperChatbot}>도우미</div>
                   </div>
                 </div>
                 <div
